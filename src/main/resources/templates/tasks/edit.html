@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Обновить</title>
+</head>
+<body>
+<table>
+<form th:method="PATCH" th:action="@{/tasks/{id}/edit(id=${task.getId()})}" th:object="${task}">
+    <tr>
+        <td><label for="name">Ключевой показатель: </label></td>
+        <td>
+    <input type="text" th:field="*{name}" id="name" readonly="true"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+        </td>
+    </tr>
+    <tr>
+        <td><label for="weight">Вес: </label></td>
+    <td><input type="text" th:field="*{weight}" id="weight" readonly = "true"/>
+        <div style="color:red" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}">Weight error</div></td>
+    </tr>
+    <tr>
+    <td><label for="minWeight">Минимум(80%): </label></td>
+    <td><input type="text" th:field="*{minWeight}" id="minWeight" readonly = "true"/>
+        <div style="color:red" th:if="${#fields.hasErrors('minWeight')}" th:errors="*{minWeight}">Min weight Error</div></td>
+    </tr>
+    <tr>
+        <td><label for="targetWeight">Таргет(100%): </label></td>
+    <td><input type="text" th:field="*{targetWeight}" id="targetWeight" readonly="true"/>
+        <div style="color:red" th:if="${#fields.hasErrors('targetWeight')}" th:errors="*{targetWeight}">Target weight Error</div></td>
+    </tr>
+    <tr>
+        <td><label for="maxWeight">Максимум(80%): </label></td>
+    <td><input type="text" th:field="*{maxWeight}" id="maxWeight" readonly = "true"/>
+        <div style="color:red" th:if="${#fields.hasErrors('maxWeight')}" th:errors="*{maxWeight}">Max weight Error</div></td>
+    </tr>
+    <tr>
+        <td><label>Метрика</label></td>
+    <td><select th:field = "*{metrics}" id = "metrics" disabled="true">
+        <option th:each="metrics1:${metricslar}" th:value="${metrics1.getId()}"th:text="${metrics1.getName()}">VALUE</option>
+    </select>
+    </td>
+    </tr>
+    <tr>
+     <td>
+         <label>Метод подсчета: </label></td>
+        <td>
+    <select name="calcType" disabled="true">
+        <option th:each="calcTypeOpt : ${T(uz.kpi.motors.enums.CalcType).values()}"
+                th:value="${calcTypeOpt}" th:text="${calcTypeOpt}"></option>
+    </select>
+
+    <div style="color:red" th:if="${#fields.hasErrors('calcType')}" th:errors="*{calcType}">Calctype  Error</div>
+    </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Выберите ответственного</label></td>
+    <td><select th:field = "*{person}" id = "person">
+        <option th:each="person1:${people}" th:value="${person1.getId()}"th:text="${person1.getName()}">VALUE</option>
+    </select>
+    </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="result">Введите результат: </label></td>
+    <td><input type="text" th:field="*{result}" id="result"/>
+    <div style="color:red" th:if="${#fields.hasErrors('result')}" th:errors="*{result}">Result Error</div>
+    </td>
+     </tr>
+    <tr>
+        <td>
+            <input type="submit" value="Update!"/></td>
+        <td>
+            </td>
+    </tr>
+
+</form>
+</table>
+</body>
+</html>

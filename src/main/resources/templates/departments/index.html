@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все департаменты</title>
+</head>
+<body>
+<p>Список департаментов</p>
+<div th:each="department : ${departments}">
+    <a th:href="@{/department/{id}(id=${department.getId()})}"
+       th:text="${department.getName()}">department</a>
+</div>
+
+<br/>
+<hr/>
+<a href="/departments/new">Добавить департамент</a>
+
+
+</body>
+</html>

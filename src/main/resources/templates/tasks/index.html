@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все задачи</title>
+</head>
+<body>
+<h2>Список задач</h2>
+
+<form th:method="POST" th:action = "@{/tasks/show}">
+    <label>Выберите период</label>
+    <select name = "period">
+        <option th:each="period:${periods}" th:value="${period.getId()}"th:text="${period.getName()}">VALUE</option>
+    </select>
+    <input type="submit" value="Показать"/>
+</form>
+
+<a href="/tasks/plan">Показать план KPI(карта)</a>
+
+
+
+</body>
+</html>

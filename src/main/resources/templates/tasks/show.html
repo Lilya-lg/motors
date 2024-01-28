@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/table.css}"/>
+    <title>Title</title>
+</head>
+<body>
+<a href="/tasks/new">Добавить задачу</a>
+<table border = "2" border-collapse = "separate" border-spacing = "0">
+    <thead bgcolor="#CCFFE5">
+    <tr>
+        <th bgcolor="#CCFFE5">Номер</th>
+        <th>Key Performance Indicators
+            </br>Ключевые показатели эффективности</th>
+        <th>Weight</br>Вес</th>
+        <th>Metrics</br>Метрика</th>
+        <th>Min (80%)</br>Минимум</th>
+        <th>Target (100%)</br>Цель</th>
+        <th>Max (120%)</br>Максимум</th>
+        <th>Метод подсчета</th>
+        <th>Fact</br>Результаты</th>
+        <th>Max weight</th>
+        <th>Actual weight</th>
+        <th>Actual weight</br>Фактический вес показателя</th>
+        <th>Ответственный за предоставление данных</th>
+        <th>Добавить / изменить данные</th>
+
+    </tr>
+    </thead>
+    <div th:each="task : ${tasks}">
+
+        <tr>
+            <td><span th:text="${taskStat.index+1}">counter</span></td>
+            <td><a th:href="@{/task/{id}(id=${task.getId()})}"
+                   th:text="${task.getName()}">task</a></td>
+            <td><span th:text="${task.getWeight()}">weight</span></td>
+            <td><span th:text="${task.getMetrics()==null} ? ${task.getMetrics()} : ${task.getMetrics().getName()}">minWeight</span></td>
+            <td><span th:text="${task.getMinWeight()}">minWeight</span></td>
+            <td><span th:text="${task.getTargetWeight()}">targetWeight</span></td>
+            <td><span th:text="${task.getMaxWeight()}">maxWeight</span></td>
+            <td><span th:text="${task.getCalcType()}">calcType</span></td>
+            <td><span th:text="${task.getResult()}">result</span></td>
+            <td><span th:text="${task.getMaxW()}">maxW</span></td>
+            <td><span th:text="${task.getMaxWeight()}">maxWeight</span></td>
+            <td><span th:text="${task.getTargetWeight()}">targetWeight</span></td>
+            <td><span th:text="${task.getPerson().getName()}">period</span></td>
+            <td><a th:href="@{/tasks/{id}/edit(id=${task.getId()})}">Редактировать</a></td>
+
+        </tr>
+    </div>
+
+    <br/>
+</table>
+
+</body>
+</html>

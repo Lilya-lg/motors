@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все задачи</title>
+</head>
+<body>
+<table>
+
+<form th:method="POST" th:action="@{/tasks}" th:object="${task}">
+    <tr>
+        <td><label for="name">Введите описание задачи: </label></td>
+    <td><input type="text" th:field="*{name}" id="name"/>
+        <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div></td>
+    </tr>
+    <tr>
+        <td>
+    <label for="weight">Введите вес: </label>
+        </td>
+        <td>
+    <input type="text" th:field="*{weight}" id="weight"/>
+    <div style="color:red" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}">Weight error</div>
+        </td>
+    <tr/>
+    <tr>
+        <td><label>Выберите ответственного</label></td>
+        <td>
+    <select th:field = "*{person}" id = "person">
+        <option th:each="person1:${people}" th:value="${person1.getId()}"th:text="${person1.getName()}">VALUE</option>
+    </select>
+        </td>
+    <tr/>
+    <tr>
+       <td>
+           <label>Выберите метрику</label></td>
+        <td>
+    <select th:field = "*{metrics}" id = "metrics">
+        <option th:each="metrics1:${metricslar}" th:value="${metrics1.getId()}"th:text="${metrics1.getName()}">VALUE</option>
+    </select>
+        </td>
+    </tr>
+    <tr>
+        <td><label for="minWeight">Введите минимум(80%): </label></td>
+    <td><input type="text" th:field="*{minWeight}" id="minWeight"/>
+    <div style="color:red" th:if="${#fields.hasErrors('minWeight')}" th:errors="*{minWeight}">Min weight Error</div>
+    </td>
+    </tr>
+    <label for="targetWeight">Введите таргет(100%): </label>
+    <input type="text" th:field="*{targetWeight}" id="targetWeight"/>
+    <div style="color:red" th:if="${#fields.hasErrors('targetWeight')}" th:errors="*{targetWeight}">Target weight Error</div>
+    <br/>
+    <label for="maxWeight">Введите максимум(80%): </label>
+    <input type="text" th:field="*{maxWeight}" id="maxWeight"/>
+    <div style="color:red" th:if="${#fields.hasErrors('maxWeight')}" th:errors="*{maxWeight}">Max weight Error</div>
+    <br/>
+    <label>Введите метод подсчета: </label>
+    <select name="calcType">
+        <option th:each="calcTypeOpt : ${T(uz.kpi.motors.enums.CalcType).values()}"
+                th:value="${calcTypeOpt}" th:text="${calcTypeOpt}"></option>
+    </select>
+    <div style="color:red" th:if="${#fields.hasErrors('calcType')}" th:errors="*{calcType}">Calctype  Error</div>
+    <label>Выберите период</label>
+    <select name = "period">
+        <option th:each="period:${periods}" th:value="${period.getId()}"th:text="${period.getName()}">VALUE</option>
+    </select>
+    <input type="submit" value="Create!"/>
+</form>
+
+</body>
+</html>
